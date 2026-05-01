@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Break the Mirror - Private Album Preview Invitation</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="mirror-container">
+        <!-- Camera/Reflection Layer -->
+        <div id="camera-layer" class="camera-layer">
+            <video id="camera-feed" autoplay playsinline muted></video>
+            <div id="placeholder-reflection" class="placeholder-reflection">
+                <div class="reflection-text">Look into the mirror...</div>
+            </div>
+        </div>
+
+        <!-- Mirror Frame -->
+        <div class="mirror-frame">
+            <!-- Canvas for cracks -->
+            <canvas id="crack-canvas"></canvas>
+            
+            <!-- Tap instruction -->
+            <div id="tap-instruction" class="tap-instruction">
+                <h1>TAP TO BREAK THE MIRROR</h1>
+                <p>Reveal your exclusive invitation</p>
+            </div>
+
+            <!-- Easter egg flash -->
+            <div id="easter-egg" class="easter-egg hidden"></div>
+        </div>
+
+        <!-- Shatter particles container -->
+        <div id="shatter-container" class="shatter-container"></div>
+
+        <!-- Revealed content (album art + invitation) -->
+        <div id="revealed-content" class="revealed-content hidden">
+            <div class="album-artwork">
+                <img src="assets/album-art.jpg" alt="Album Artwork" id="album-image">
+            </div>
+            <div class="invitation-overlay">
+                <h2 class="invitation-title">YOU'RE INVITED</h2>
+                <p class="invitation-subtitle">Private Album Preview Show</p>
+                <div class="show-details">
+                    <p class="detail-line"><strong>Date:</strong> <span id="show-date">TBA</span></p>
+                    <p class="detail-line"><strong>Time:</strong> <span id="show-time">TBA</span></p>
+                    <p class="detail-line"><strong>Venue:</strong> <span id="show-venue">TBA</span></p>
+                </div>
+                <a href="#" id="ticket-button" class="ticket-button" target="_blank">
+                    GET YOUR TICKETS
+                </a>
+                <button id="replay-button" class="replay-button">Break It Again</button>
+            </div>
+        </div>
+
+        <!-- Camera permission prompt -->
+        <div id="camera-prompt" class="camera-prompt hidden">
+            <div class="prompt-content">
+                <h3>See Yourself in the Mirror</h3>
+                <p>Allow camera access for a more immersive experience</p>
+                <button id="allow-camera" class="allow-button">Allow Camera</button>
+                <button id="skip-camera" class="skip-button">Skip</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Audio context initialization (user interaction required) -->
+    <div id="audio-init" class="audio-init hidden">
+        <button id="start-experience" class="start-button">START EXPERIENCE</button>
+    </div>
+
+    <script src="camera-handler.js"></script>
+    <script src="audio-engine.js"></script>
+    <script src="mirror-break.js"></script>
+</body>
+</html>
