@@ -428,8 +428,14 @@ class MirrorBreak {
             this.revealedContent.classList.add('hidden');
         }, 300);
         
+        // Show mirror frame and canvas again
+        this.mirrorFrame.style.opacity = '1';
+        this.mirrorFrame.style.pointerEvents = 'auto';
+        this.canvas.style.opacity = '1';
+        
         // Show instruction again
         this.tapInstruction.classList.remove('hidden');
+        this.tapInstruction.style.opacity = '1';
     }
 }
 

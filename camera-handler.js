@@ -42,6 +42,7 @@ class CameraHandler {
 
     showPlaceholder() {
         this.placeholder.classList.remove('hidden');
+        this.placeholder.style.opacity = '0.3';
         this.videoElement.style.display = 'none';
         this.hasCamera = false;
     }
