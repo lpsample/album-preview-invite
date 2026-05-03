@@ -280,6 +280,16 @@ class MirrorBreak {
         setTimeout(() => {
             this.revealedContent.classList.remove('hidden');
             this.revealedContent.classList.add('visible');
+            
+            // Play reveal music starting at 2:47 (167 seconds)
+            const revealMusic = document.getElementById('reveal-music');
+            if (revealMusic) {
+                revealMusic.currentTime = 167; // 2:47 in seconds
+                revealMusic.volume = 0.7; // 70% volume
+                revealMusic.play().catch(err => {
+                    console.log('Audio playback failed:', err);
+                });
+            }
         }, 1000);
     }
     
@@ -377,6 +387,13 @@ class MirrorBreak {
         
         // Reset camera
         this.camera.reset();
+        
+        // Stop reveal music
+        const revealMusic = document.getElementById('reveal-music');
+        if (revealMusic) {
+            revealMusic.pause();
+            revealMusic.currentTime = 0;
+        }
         
         // Hide revealed content
         this.revealedContent.classList.remove('visible');
