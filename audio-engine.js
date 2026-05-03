@@ -49,14 +49,19 @@ class AudioEngine {
 
         // Use audio file on mobile
         if (this.isMobile) {
-            if (this.audioFiles.tap) {
-                const audio = this.audioFiles.tap.cloneNode();
-                audio.volume = 0.3 + (intensity * 0.4);
-                audio.play().catch(err => console.log('Tap sound failed:', err));
+            try {
+                if (this.audioFiles.tap) {
+                    const audio = this.audioFiles.tap.cloneNode();
+                    audio.volume = 0.3 + (intensity * 0.4);
+                    audio.play().catch(err => console.log('Tap sound failed:', err));
+                }
+            } catch (err) {
+                console.log('Mobile tap sound error:', err);
             }
             return;
         }
 
+        if (!this.audioContext) return;
         const now = this.audioContext.currentTime;
         
         // Create oscillator for tap sound
@@ -146,14 +151,19 @@ class AudioEngine {
 
         // Use audio file on mobile
         if (this.isMobile) {
-            if (this.audioFiles.shatter) {
-                const audio = this.audioFiles.shatter.cloneNode();
-                audio.volume = 0.6;
-                audio.play().catch(err => console.log('Shatter sound failed:', err));
+            try {
+                if (this.audioFiles.shatter) {
+                    const audio = this.audioFiles.shatter.cloneNode();
+                    audio.volume = 0.6;
+                    audio.play().catch(err => console.log('Shatter sound failed:', err));
+                }
+            } catch (err) {
+                console.log('Mobile shatter sound error:', err);
             }
             return;
         }
 
+        if (!this.audioContext) return;
         const now = this.audioContext.currentTime;
         
         // Main crash - multiple overlapping sounds
