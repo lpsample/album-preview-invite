@@ -7,61 +7,27 @@ class AudioEngine {
         this.audioContext = null;
         this.isInitialized = false;
         this.masterGain = null;
-        this.isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
-        this.audioFiles = {};
-        
-        // Preload audio files for mobile
-        if (this.isMobile) {
-            this.preloadAudioFiles();
-        }
-    }
-
-    preloadAudioFiles() {
-        const sounds = ['tap', 'shatter'];
-        sounds.forEach(sound => {
-            const audio = new Audio(`assets/sounds/${sound}.m4a`);
-            audio.preload = 'auto';
-            audio.volume = 0.5;
-            this.audioFiles[sound] = audio;
-        });
     }
 
     initialize() {
         if (this.isInitialized) return;
 
         try {
-            if (!this.isMobile) {
-                this.audioContext = new (window.AudioContext || window.webkitAudioContext)();
-                this.masterGain = this.audioContext.createGain();
-                this.masterGain.connect(this.audioContext.destination);
-                this.masterGain.gain.value = 0.7; // Master volume
-            }
+            this.audioContext = new (window.AudioContext || window.webkitAudioContext)();
+            this.masterGain = this.audioContext.createGain();
+            this.masterGain.connect(this.audioContext.destination);
+            this.masterGain.gain.value = 0.7; // Master volume
+            this.isInitialized = true;
         } catch (error) {
             console.error('Audio initialization failed:', error);
+            // Set initialized anyway so the experience works without audio
+            this.isInitialized = true;
         }
-        
-        // Always set initialized to true, even on mobile or if audio fails
-        this.isInitialized = true;
     }
 
     playTapSound(intensity) {
-        if (!this.isInitialized) return;
+        if (!this.isInitialized || !this.audioContext) return;
 
-        // Use audio file on mobile
-        if (this.isMobile) {
-            try {
-                if (this.audioFiles.tap) {
-                    const audio = this.audioFiles.tap.cloneNode();
-                    audio.volume = 0.3 + (intensity * 0.4);
-                    audio.play().catch(err => console.log('Tap sound failed:', err));
-                }
-            } catch (err) {
-                console.log('Mobile tap sound error:', err);
-            }
-            return;
-        }
-
-        if (!this.audioContext) return;
         const now = this.audioContext.currentTime;
         
         // Create oscillator for tap sound
@@ -90,7 +56,7 @@ class AudioEngine {
     }
 
     playImpactNoise(intensity, startTime) {
-        if (!this.isInitialized) return;
+        if (!this.isInitialized || !this.audioContext) return;
 
         // Create white noise for impact
         const bufferSize = this.audioContext.sampleRate * 0.1;
@@ -124,7 +90,7 @@ class AudioEngine {
     }
 
     playCreakSound(intensity) {
-        if (!this.isInitialized) return;
+        if (!this.isInitialized || !this.audioContext) return;
 
         const now = this.audioContext.currentTime;
         
@@ -147,23 +113,8 @@ class AudioEngine {
     }
 
     playShatterSound() {
-        if (!this.isInitialized) return;
+        if (!this.isInitialized || !this.audioContext) return;
 
-        // Use audio file on mobile
-        if (this.isMobile) {
-            try {
-                if (this.audioFiles.shatter) {
-                    const audio = this.audioFiles.shatter.cloneNode();
-                    audio.volume = 0.6;
-                    audio.play().catch(err => console.log('Shatter sound failed:', err));
-                }
-            } catch (err) {
-                console.log('Mobile shatter sound error:', err);
-            }
-            return;
-        }
-
-        if (!this.audioContext) return;
         const now = this.audioContext.currentTime;
         
         // Main crash - multiple overlapping sounds
@@ -194,7 +145,7 @@ class AudioEngine {
     }
 
     playShatterNoise(startTime) {
-        if (!this.isInitialized) return;
+        if (!this.isInitialized || !this.audioContext) return;
 
         const bufferSize = this.audioContext.sampleRate * 0.8;
         const buffer = this.audioContext.createBuffer(1, bufferSize, this.audioContext.sampleRate);
@@ -226,7 +177,7 @@ class AudioEngine {
     }
 
     playRumble(startTime) {
-        if (!this.isInitialized) return;
+        if (!this.isInitialized || !this.audioContext) return;
 
         const oscillator = this.audioContext.createOscillator();
         const gainNode = this.audioContext.createGain();
@@ -245,7 +196,7 @@ class AudioEngine {
     }
 
     playAmbientTension(intensity) {
-        if (!this.isInitialized) return;
+        if (!this.isInitialized || !this.audioContext) return;
 
         const now = this.audioContext.currentTime;
         
