@@ -288,7 +288,7 @@ class MirrorBreak {
             const revealMusic = document.getElementById('reveal-music');
             if (revealMusic) {
                 revealMusic.currentTime = 167; // 2:47 in seconds
-                revealMusic.volume = 0.7; // 70% volume
+                revealMusic.volume = 0.3; // 30% volume
                 revealMusic.play().catch(err => {
                     console.log('Audio playback failed:', err);
                 });
