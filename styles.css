@@ -91,10 +91,10 @@ body {
     height: 100%;
     border-radius: 50%;
     border: 15px solid #2a2a2a;
-    box-shadow: 
+    box-shadow:
         0 0 50px rgba(0, 0, 0, 0.8),
         inset 0 0 50px rgba(255, 255, 255, 0.05),
-        0 0 100px rgba(74, 158, 255, 0.2);
+        0 0 100px rgba(30, 58, 138, 0.2);
     z-index: 2;
     cursor: pointer;
     transition: all 0.3s ease;
