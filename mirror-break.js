@@ -40,7 +40,7 @@ class MirrorBreak {
             ticketURL: 'https://bitterend.com/#/events/181276',
             showDate: 'June 27',
             showTime: '8:00 PM',
-            showVenue: 'The Bitter End NYC - 147 Bleecker St, New York, NY 10012'
+            showVenue: 'The Bitter End - 147 Bleecker St, New York, NY 10012'
         };
         
         this.init();

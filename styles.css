@@ -259,8 +259,9 @@ body {
 .album-artwork img {
     width: 100%;
     height: 100%;
-    object-fit: cover;
+    object-fit: contain;
     display: block;
+    background: #000;
 }
 
 .invitation-overlay {
@@ -307,6 +308,18 @@ body {
 .detail-line strong {
     color: #4a9eff;
     margin-right: 10px;
+}
+
+.personal-message {
+    font-size: 1rem;
+    color: #d0d0d0;
+    line-height: 1.6;
+    margin: 20px 0;
+    padding: 20px;
+    background: rgba(255, 255, 255, 0.03);
+    border-radius: 10px;
+    font-style: italic;
+    text-align: left;
 }
 
 .ticket-button {
