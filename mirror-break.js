@@ -83,13 +83,18 @@ class MirrorBreak {
             this.camera.showPlaceholder();
         });
         
-        // Mirror tapping
-        this.mirrorFrame.addEventListener('click', (e) => this.handleTap(e));
-        this.mirrorFrame.addEventListener('touchend', (e) => {
-            e.preventDefault();
-            const touch = e.changedTouches[0];
-            this.handleTap(touch);
+        // Mirror tapping - both click and touch
+        this.mirrorFrame.addEventListener('click', (e) => {
+            console.log('Click event');
+            this.handleTap(e);
         });
+        
+        this.mirrorFrame.addEventListener('touchstart', (e) => {
+            e.preventDefault();
+            console.log('Touch event');
+            const touch = e.touches[0];
+            this.handleTap(touch);
+        }, { passive: false });
         
         // Replay button
         document.getElementById('replay-button').addEventListener('click', () => {
