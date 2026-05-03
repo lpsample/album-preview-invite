@@ -31,7 +31,10 @@ class MirrorBreak {
             "The mirror knows",
             "Break free",
             "See yourself",
-            "Almost there..."
+            "Almost there...",
+            "Look in the mirror and beg",
+            "Keep begging",
+            "Beg more"
         ];
         this.easterEggShown = [];
         
