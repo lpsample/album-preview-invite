@@ -101,8 +101,21 @@ class MirrorBreak {
             this.reset();
         });
         
-        // Ticket button
-        document.getElementById('ticket-button').href = this.config.ticketURL;
+        // Ticket button with Meta Pixel tracking
+        const ticketButton = document.getElementById('ticket-button');
+        ticketButton.href = this.config.ticketURL;
+        ticketButton.addEventListener('click', () => {
+            // Track ticket button click with Meta Pixel
+            if (typeof fbq !== 'undefined') {
+                fbq('track', 'InitiateCheckout', {
+                    content_name: 'Album Preview Show Ticket',
+                    content_category: 'Event Ticket',
+                    value: 0,
+                    currency: 'USD'
+                });
+                console.log('Meta Pixel: Ticket click tracked');
+            }
+        });
         
         // Mobile shake detection
         if (window.DeviceMotionEvent) {
