@@ -28,9 +28,9 @@ class MirrorBreak {
         // Easter eggs
         this.easterEggs = [
             "Look closer...",
-            "The mirror knows",
+            "Look in the mirror and beg",
             "Break free",
-            "See yourself",
+            "Don't stop",
             "Almost there...",
             "Look in the mirror and beg",
             "Keep begging",
@@ -85,9 +85,10 @@ class MirrorBreak {
         
         // Mirror tapping
         this.mirrorFrame.addEventListener('click', (e) => this.handleTap(e));
-        this.mirrorFrame.addEventListener('touchstart', (e) => {
+        this.mirrorFrame.addEventListener('touchend', (e) => {
             e.preventDefault();
-            this.handleTap(e.touches[0]);
+            const touch = e.changedTouches[0];
+            this.handleTap(touch);
         });
         
         // Replay button

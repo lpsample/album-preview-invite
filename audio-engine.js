@@ -7,35 +7,16 @@ class AudioEngine {
         this.audioContext = null;
         this.isInitialized = false;
         this.masterGain = null;
-        this.isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
-        this.audioFiles = {};
-        
-        // Preload audio files for mobile
-        if (this.isMobile) {
-            this.preloadAudioFiles();
-        }
-    }
-
-    preloadAudioFiles() {
-        const sounds = ['tap', 'shatter'];
-        sounds.forEach(sound => {
-            const audio = new Audio(`assets/sounds/${sound}.m4a`);
-            audio.preload = 'auto';
-            audio.volume = 0.5;
-            this.audioFiles[sound] = audio;
-        });
     }
 
     initialize() {
         if (this.isInitialized) return;
 
         try {
-            if (!this.isMobile) {
-                this.audioContext = new (window.AudioContext || window.webkitAudioContext)();
-                this.masterGain = this.audioContext.createGain();
-                this.masterGain.connect(this.audioContext.destination);
-                this.masterGain.gain.value = 0.7; // Master volume
-            }
+            this.audioContext = new (window.AudioContext || window.webkitAudioContext)();
+            this.masterGain = this.audioContext.createGain();
+            this.masterGain.connect(this.audioContext.destination);
+            this.masterGain.gain.value = 0.7; // Master volume
             this.isInitialized = true;
         } catch (error) {
             console.error('Audio initialization failed:', error);
@@ -44,21 +25,6 @@ class AudioEngine {
 
     playTapSound(intensity) {
         if (!this.isInitialized) return;
-
-        // Use audio file on mobile
-        if (this.isMobile) {
-            if (this.audioFiles.tap) {
-                const audio = this.audioFiles.tap.cloneNode();
-                audio.volume = 0.3 + (intensity * 0.4);
-                audio.play().catch(err => console.log('Tap sound failed:', err));
-                // Stop after 0.2 seconds to keep it short
-                setTimeout(() => {
-                    audio.pause();
-                    audio.currentTime = 0;
-                }, 200);
-            }
-            return;
-        }
 
         const now = this.audioContext.currentTime;
         
@@ -146,16 +112,6 @@ class AudioEngine {
 
     playShatterSound() {
         if (!this.isInitialized) return;
-
-        // Use audio file on mobile
-        if (this.isMobile) {
-            if (this.audioFiles.shatter) {
-                const audio = this.audioFiles.shatter.cloneNode();
-                audio.volume = 0.6;
-                audio.play().catch(err => console.log('Shatter sound failed:', err));
-            }
-            return;
-        }
 
         const now = this.audioContext.currentTime;
         
