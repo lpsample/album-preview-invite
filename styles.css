@@ -227,7 +227,7 @@ body {
     position: fixed;
     top: 50%;
     left: 50%;
-    transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%) scale(1);
     width: 90vw;
     max-width: 600px;
     max-height: 90vh;
@@ -246,7 +246,7 @@ body {
 .revealed-content.visible {
     opacity: 1;
     pointer-events: all;
-    animation: revealContent 1.5s ease-out;
+    animation: revealContent 1.5s ease-out forwards;
 }
 
 .revealed-content.hidden {
@@ -558,15 +558,15 @@ body {
 @keyframes revealContent {
     0% {
         opacity: 0;
-        transform: scale(0.5);
+        transform: translate(-50%, -50%) scale(0.5);
     }
     50% {
         opacity: 0.8;
-        transform: scale(1.05);
+        transform: translate(-50%, -50%) scale(1.05);
     }
     100% {
         opacity: 1;
-        transform: scale(1);
+        transform: translate(-50%, -50%) scale(1);
     }
 }
 
