@@ -36,10 +36,12 @@ class AudioEngine {
                 this.masterGain.connect(this.audioContext.destination);
                 this.masterGain.gain.value = 0.7; // Master volume
             }
-            this.isInitialized = true;
         } catch (error) {
             console.error('Audio initialization failed:', error);
         }
+        
+        // Always set initialized to true, even on mobile or if audio fails
+        this.isInitialized = true;
     }
 
     playTapSound(intensity) {
