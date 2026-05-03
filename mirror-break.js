@@ -120,11 +120,16 @@ class MirrorBreak {
         
         // Get tap position relative to canvas
         const rect = this.canvas.getBoundingClientRect();
-        const x = (e.clientX - rect.left) / rect.width;
-        const y = (e.clientY - rect.top) / rect.height;
+        // Handle both mouse and touch events
+        const clientX = e.clientX !== undefined ? e.clientX : (e.touches ? e.touches[0].clientX : e.pageX);
+        const clientY = e.clientY !== undefined ? e.clientY : (e.touches ? e.touches[0].clientY : e.pageY);
+        const x = (clientX - rect.left) / rect.width;
+        const y = (clientY - rect.top) / rect.height;
         
         this.tapCount++;
         const intensity = this.tapCount / this.requiredTaps;
+        
+        console.log(`Tap ${this.tapCount}/${this.requiredTaps} at (${x.toFixed(2)}, ${y.toFixed(2)})`);
         
         // Play tap sound
         this.audio.playTapSound(intensity);

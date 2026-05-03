@@ -51,6 +51,11 @@ class AudioEngine {
                 const audio = this.audioFiles.tap.cloneNode();
                 audio.volume = 0.3 + (intensity * 0.4);
                 audio.play().catch(err => console.log('Tap sound failed:', err));
+                // Stop after 0.2 seconds to keep it short
+                setTimeout(() => {
+                    audio.pause();
+                    audio.currentTime = 0;
+                }, 200);
             }
             return;
         }
